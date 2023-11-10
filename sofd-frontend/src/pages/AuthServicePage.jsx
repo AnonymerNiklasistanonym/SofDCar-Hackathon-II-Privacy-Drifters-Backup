@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography, Container, CssBaseline, Box, Grid } from '@mui/material';
+import { Typography, Container, CssBaseline, Box, Grid } from '@mui/material';
 
 const AuthServicePage = () => {
   // Dummy data for demonstration
@@ -17,7 +17,7 @@ const AuthServicePage = () => {
     <Container component="main" maxWidth="md" style={{ marginTop: '180px' }}>
       <CssBaseline />
       <div>
-        <Typography variant="h5" style={{fontSize:30, fontWeight: 'bold',}}>AuthServicePage</Typography>
+        <Typography variant="h5" style={{ fontSize: 30, fontWeight: 'bold', }}>AuthServicePage</Typography>
 
         {/* Render 7 boxes in rows of 3 */}
         <Grid container spacing={2}>
@@ -33,7 +33,7 @@ const AuthServicePage = () => {
           ))}
         </Grid>
 
-        
+
       </div>
     </Container>
   );
