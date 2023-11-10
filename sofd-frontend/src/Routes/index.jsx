@@ -1,17 +1,33 @@
 import { createBrowserRouter } from "react-router-dom";
-import FirstPage from "../components/FirstPage";
+import Layout from "../pages/Layout";
+import MatchingServicePage from "../pages/MatchingServicePage";
+import AuthServicePage from "../pages/AuthServicePage";
+import SmartContractPage from "../pages/SmartContractPage";
 import App from "../App";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-  },
-  
-  {
-    // This is the catch-all route for unmatched URLs, which redirects to the home page.
-    path: "*",
-    element: <FirstPage />,
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        path: "matching-service",
+        element: <MatchingServicePage />,
+      },
+      {
+        path: "auth-service",
+        element: <AuthServicePage />,
+      },
+      {
+        path: "smart-contract",
+        element: <SmartContractPage />,
+      },
+      {
+        path: "*",
+        element: <App />,
+      },
+    ],
   },
 ]);
