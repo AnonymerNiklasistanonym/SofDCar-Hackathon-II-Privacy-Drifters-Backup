@@ -1,0 +1,38 @@
+<p>Welcome Ride-Provider to the decentralised ride sharing platfrom</p>
+<button id="connectButton" (click)="onLoginButtonClick()">Connect to MetaMask</button>
+<div *ngIf="myAddress">
+  <p>Your MetaMask address: <span id="address"></span></p>
+  <p>Your MetaMask balance: <span id="balance"></span></p>
+</div>
+
+<div *ngIf="myAddress">
+<input id="contractID" type="text" placeholder="Enter the Contract ID">
+<button id="signRideButton" (click)="onSignRideButtonClick()">Sign Ride</button>
+</div>
+
+<div *ngIf="myAddress">
+  <input id="rideProviderAcceptedStatusMessage" type="text" placeholder="Enter Message">
+  <button id="rideProviderAcceptedStatus" (click)="setRideProviderAcceptedStatus()">Accepted and started driving to Pick-up location</button>
+</div>
+
+<div *ngIf="myAddress">
+  <input id="rideProviderArrivedAtPickupLocationMessage" type="text" placeholder="Enter Message">
+  <button id="rideProviderArrivedAtPickupLocation" (click)="setRideProviderArrivedAtPickupLocation()">Arrived at Pickup location</button>
+</div>
+
+<div *ngIf="myAddress">
+  <input id="rideProviderStartedRideMessage" type="text" placeholder="Enter Message">
+  <button id="rideProviderStartedRide" (click)="setRideProviderStartedRide()">Starting ride with user on board</button>
+</div>
+
+<div *ngIf="myAddress">
+  <input id="rideProviderArrivedAtDropoffLocationMessage" type="text" placeholder="Enter Message">
+  <button id="rideProviderArrivedAtDropoffLocation" (click)="setRideProviderArrivedAtDropoffLocation()">Arrived at Drop-off location</button>
+</div>
+
+<div *ngIf="myAddress">
+  <p></p>
+  <button id="claimDepositButton" (click)="onClaimDepositButtonClick()">Claim Deposit</button>
+</div>
+
+<router-outlet></router-outlet>

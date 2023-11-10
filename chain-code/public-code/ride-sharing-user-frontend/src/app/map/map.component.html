@@ -1,0 +1,22 @@
+<app-header></app-header>
+
+<div id='map'></div>
+
+<div *ngIf="!routeFound">
+  <div class="input-icon">
+    <input type="text" id="pickuo" [(ngModel)]="pickupLocation" placeholder="Enter Pickup Location"/>
+    <i (click)="getCurrentLocation()" class="fas fa-location-arrow" ></i>
+  </div>
+  <input type="text" [(ngModel)]="dropoffLocation" placeholder="Enter Dropoff Location"/>
+  <button (click)="displayRoute()">Find Route</button>
+</div>
+
+
+<div *ngIf="routeFound">
+  <div class="logo-container">
+    <p class="logo" [innerHTML]="rideDistanceAndDurcationString"></p>
+  </div>
+  <button (click)="startBooking()">Request Ride</button>
+  <button (click)="routeFoundSwitch()">Back</button>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,9 @@
+<div class="rating-container">
+  <button (click)="decrementRating()">-</button>
+
+  <span *ngFor="let star of [1,2,3,4,5]; let i = index">
+    <i class="fa" [class.fa-star]="i < rating" [class.fa-star-o]="i >= rating"></i>
+  </span>
+
+  <button (click)="incrementRating()">+</button>
+</div>

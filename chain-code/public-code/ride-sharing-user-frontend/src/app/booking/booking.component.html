@@ -1,0 +1,87 @@
+<app-header></app-header>
+
+<div *ngIf="!rideSearchStatus">
+  <h3 class="center-text">Finding your perfect ride...</h3>
+  <div class="loading"> <app-loading></app-loading> </div>
+  <button class="cancel-button" (click)="cancelBooking()">Cancel</button>
+</div>
+
+<div *ngIf="rideSearchStatus && !rideContractAddress && rideFoundStatus && !offerExpired">
+  <div>
+    <h1 class="rideDetailsTextHeader" style="color: red;">Offer valid for {{ bookingTimer }} seconds</h1>
+  </div>
+  <div class="rideDetails" >
+    <p class="rideDetailsTextHeader">Your Ride: {{ auctionWinner }}</p>
+    <p class="rideDetailsText">Amount: {{ auctionResult }} €</p>
+    <p class="rideDetailsText">Estimated Arrival Time: {{ estimatedArrivalTime }}</p>
+    <p class="rideDetailsText">Model: {{ model }}</p>
+    <p class="rideDetailsText">Passenger Count: {{ passengerCount }}</p>
+    <p class="rideDetailsText">Rating: {{ rating }}</p>
+  </div>
+  <button  id="bookRideButton" (click)="bookRide()">Book Ride</button>
+  <button (click)="bookNewRide()">Back</button>
+</div>
+
+<div *ngIf="rideSearchStatus && !rideContractAddress && !rideFoundStatus && !offerExpired">
+  <div class="rideDetails" >
+    <p class="rideDetailsTextHeader">Sorry we could not find a ride for you</p>
+    <p class="rideDetailsText">Please try later again</p>
+  </div>
+  <button (click)="bookNewRide()">Back</button>
+</div>
+
+<div *ngIf="offerExpired && !rideContractAddress">
+  <div class="rideDetails" >
+    <p class="rideDetailsTextHeader">Sorry your ride offer expired</p>
+    <p class="rideDetailsText">Please try again</p>
+  </div>
+  <button (click)="bookNewRide()">Back</button>
+</div>
+
+<div *ngIf="rideContractAddress && rideProviderAcceptedStatus == false && rideProviderArrivedAtPickupLocation == false && rideProviderStartedRide == false && rideProviderArrivedAtDropoffLocation== false ">
+  <h3 class="center-text">Waiting for the Ride provider to confirm the ride</h3>
+
+</div>
+
+<div *ngIf="rideProviderAcceptedStatus">
+  <h3 class="center-text">Status: <br> Ride Provider confirmed Ride and is now Driving to the Pick-up Location</h3>
+</div>
+
+<div *ngIf="rideProviderArrivedAtPickupLocation">
+  <h3 class="left-text">Status: <br> Vehicle arrived at Pick-up Location</h3>
+  <p class="left-text"> Please enter the Vehicle and Press the Button when you are Ready to start the Drive</p>
+  <button id="userReadyToStartRide" (click)="setUserReadyToStartRide()">Start Driving</button>
+</div>
+
+<div *ngIf="rideProviderStartedRide">
+  <h3 class="left-text">Status: <br> Driving to your Destination</h3>
+</div>
+
+<div *ngIf="rideProviderArrivedAtDropoffLocation && !rideMarkedComplete">
+  <h3 class="left-text">Status: <br> We arrived at your Destination</h3>
+  <p class="left-text"> Please leave the Vehicle and Press the Button to complete your Ride</p>
+  <button id="userMarkedRideComplete" (click)="setUserMarkedRideComplete()">Ride successfully completed</button>
+</div>
+
+<div *ngIf="!rideMarkedComplete && rideContractAddress">
+  <button (click)="cancelRide()">Cancel Ride</button>
+</div>
+
+<div *ngIf="rideMarkedComplete">
+  <h3 class="center-text"> Ride Completed</h3>
+  <p class="center-text"> Thank you for riding with us</p>
+  <div>
+    <p class="center-text"> Please rate your Ride</p>
+    <p class="center-text-small">Please Note: The Rating is a very important Metric. Only use ratings below 5 if you have specific complaints</p>
+    <app-rating class="center-text" (ratingChange)="handleRatingChange($event)"></app-rating>
+    <button (click)="rateRide()">Submit</button>
+  </div>
+  <div>
+    <p class="center-text">Please rate your Passengers </p>
+    <app-user-rating [passengerNumber]="0"></app-user-rating>
+    <app-user-rating [passengerNumber]="1"></app-user-rating>
+  </div>
+  <button (click)="bookNewRide()">Home</button>
+</div>
+<app-footer></app-footer>
+<router-outlet></router-outlet>

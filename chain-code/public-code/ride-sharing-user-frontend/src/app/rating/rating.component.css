@@ -1,0 +1,20 @@
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rating-container button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.fa-star {
+  color: gold;
+}
+
+.fa-star-o {
+  color: grey;
+}
