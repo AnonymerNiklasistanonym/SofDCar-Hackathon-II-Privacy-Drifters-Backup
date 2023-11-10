@@ -5,7 +5,6 @@ import AuthServicePage from "../pages/AuthServicePage";
 import SmartContractPage from "../pages/SmartContractPage";
 import App from "../App";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
