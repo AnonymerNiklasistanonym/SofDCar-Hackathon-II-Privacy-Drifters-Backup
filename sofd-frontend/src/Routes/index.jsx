@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <MatchingServicePage />,
+      },
+      {
+        index: true,
         path: "matching-service",
         element: <MatchingServicePage />,
       },
