@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
 
-// Initialize Google Analytics
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
