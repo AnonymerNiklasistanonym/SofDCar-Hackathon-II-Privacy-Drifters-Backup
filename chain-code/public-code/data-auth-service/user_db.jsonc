@@ -1,0 +1,29 @@
+// Description: User database
+{
+    "data_hash" : "hash",
+    "data" : "json string of passport data, firstname, lastname, date of birth...",
+    "account_id": "account id of the user",
+    "banned": "true/false"
+}
+
+// Psuedonym Database
+
+{
+    "pseudonym" : "hex string",
+    "account_id": "account_id"
+}
+
+// 
+{
+    "account_id": "account id of the user",
+    "public_key": "Public Key of the user",
+    "wallet_id": "the wallet address"
+}
+
+// Private Blockchain User Data
+
+{
+    "userHash": "hash",
+    "accountId": "account id of the user",
+    "banned": "true/false"
+}
