@@ -1,15 +1,23 @@
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { ToggleButtonGroup, ToggleButton, Typography } from '@mui/material';
 
 const Layout = () => {
-  const [alignment, setAlignment] = React.useState('matching-service');
+  const [alignment, setAlignment] = React.useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
     navigate(`/${newAlignment}`);
   };
+
+  React.useEffect(() => {
+    const path = location.pathname.replace('/', '');
+    if (path && path !== alignment) {
+      setAlignment(path);
+    }
+  }, [location, alignment]);
 
   return (
     <div>
@@ -24,9 +32,7 @@ const Layout = () => {
         padding: '1rem',
         zIndex: 1000,
       }}>
-        <Box textAlign={'center'} fontWeight={'bold'} mb={1}>
-          Check what data different services can access
-        </Box>
+        <Typography variant="h6" style={{ fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Check what data different services can access</Typography>
         <ToggleButtonGroup
           color="primary"
           value={alignment}
