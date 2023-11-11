@@ -6,6 +6,11 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import GpsNotFixedIcon from '@mui/icons-material/GpsNotFixed';
 
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+
+import pinImage from '../assets/pin.png';
+
 const RidingPoolMap = () => {
 
 
@@ -22,6 +27,8 @@ const RidingPoolMap = () => {
     boxShadow: 24,
     p: 4,
   };
+
+   
 
   const resolution = 8;
   
@@ -60,11 +67,11 @@ const RidingPoolMap = () => {
         userId: "abcd",
         pickupLocation: {
           "type": "pickup location",
-          "coordinates": [48.7758, 9.1729]
+          "coordinates": [48.7738, 9.1729]
         },
         dropoffLocation: {
           "type": "dropoff location",
-          "coordinates": [48.7758, 9.2229]
+          "coordinates": [48.7728, 9.2229]
         },
         gridLocation: "876524d95fffffe",
         rating: 4.5,
@@ -81,11 +88,11 @@ const RidingPoolMap = () => {
         userId: "abcd",
         pickupLocation: {
           "type": "pickup location",
-          "coordinates": [48.7758, 9.1729]
+          "coordinates": [48.7658, 9.1729]
         },
         dropoffLocation: {
           "type": "dropoff location",
-          "coordinates": [48.7758, 9.2229]
+          "coordinates": [48.7658, 9.2229]
         },
         gridLocation: "876524d95fffffe",
         rating: 4.5,
@@ -211,6 +218,49 @@ const RidingPoolMap = () => {
     setCurrentCordinate([lng, lat]);
   }
 
+  function getAllMarkers() {
+    return fetchDummyData().map((data) => {
+      console.log(data);
+      return (
+
+
+
+        <Marker
+        longitude={data.pickupLocation.coordinates[1]}
+        latitude={data.pickupLocation.coordinates[0]}
+        pitchAlignment='map'
+        color='red'
+        anchor='bottom'
+
+      >
+        <img src={pinImage} alt="car" width="20px" height="20px" />
+      </Marker>
+      );
+    });
+  }
+
+
+
+  function getAllMarkers2() {
+    return fetchDummyData().map((data) => {
+      console.log(data);
+      return (
+
+
+
+        <Marker
+        longitude={data.dropoffLocation.coordinates[1]}
+        latitude={data.dropoffLocation.coordinates[0]}
+        pitchAlignment='map'
+        color='red'
+        anchor='bottom'
+
+      >
+        <img src={pinImage} alt="car" width="20px" height="20px" />
+      </Marker>
+      );
+    });
+  }
   
 
   return (
@@ -273,6 +323,7 @@ const RidingPoolMap = () => {
               {data.userPublicKey}
             </Typography>
             </div>
+            
       )}
       )}
         
@@ -299,10 +350,23 @@ const RidingPoolMap = () => {
               maxHeight: "100vh",
               overflow: "hidden",
             }}
+            
           >
 
 
-  
+            
+
+{
+              getAllMarkers()
+             
+              
+            }
+
+{
+   getAllMarkers2() 
+}
+           
+        
         <Source
               type="geojson"
               data= {{
@@ -327,16 +391,19 @@ const RidingPoolMap = () => {
                 }}
 
               />
+
+           
               
             </Source>
       
       
-
+             
 
 
             
           </Map>
         </div> 
+
       </div>
   );
 };
