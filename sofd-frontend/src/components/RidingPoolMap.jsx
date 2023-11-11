@@ -4,6 +4,7 @@ import {cellToBoundary, polygonToCells, cellsToMultiPolygon, cellToChildPos, lat
 import { Box, Button, Divider, Modal, Typography } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import GpsNotFixedIcon from '@mui/icons-material/GpsNotFixed';
 
 const RidingPoolMap = () => {
 
@@ -21,6 +22,8 @@ const RidingPoolMap = () => {
     boxShadow: 24,
     p: 4,
   };
+
+  const resolution = 8;
   
 
   const [currentCordinateLng,setCurrentCordinateLng] = React.useState(48.7758);
@@ -123,12 +126,12 @@ const RidingPoolMap = () => {
 
     const getHexIndexWithDataDrop = fetchDummyData().
     map((data) => {
-      return latLngToCell(data.pickupLocation.coordinates[0], data.pickupLocation.coordinates[1], 7);
+      return latLngToCell(data.pickupLocation.coordinates[0], data.pickupLocation.coordinates[1], resolution);
     })
 
     const getHexIndexWithDataPickup = fetchDummyData().
     map((data) => {
-      return latLngToCell(data.dropoffLocation.coordinates[0], data.dropoffLocation.coordinates[1], 7);
+      return latLngToCell(data.dropoffLocation.coordinates[0], data.dropoffLocation.coordinates[1], resolution);
     });
 
     // merge and remove duplicates
@@ -164,15 +167,15 @@ const RidingPoolMap = () => {
 
   function getPolygonIndexes() {
     const polygon = [
-      [currentCordinateLng - 1.0, currentCordinateLat + 1.0],
-      [currentCordinateLng - 1.0,  currentCordinateLat - 1.0],
-      [currentCordinateLng + 1.0, currentCordinateLat - 1.0],
-      [currentCordinateLng + 1.0, currentCordinateLat + 1.0],
+      [currentCordinateLng - 0.5, currentCordinateLat + 0.5],
+      [currentCordinateLng - 0.5,  currentCordinateLat - 0.5],
+      [currentCordinateLng + 0.5, currentCordinateLat - 0.5],
+      [currentCordinateLng + 0.5, currentCordinateLat + 0.5],
   ];
 
   //const h3Ine
 
-   const hexagons = polygonToCells(polygon, 7);
+   const hexagons = polygonToCells(polygon, resolution);
     return hexagons;
   }
 
@@ -180,7 +183,7 @@ const RidingPoolMap = () => {
 
     // get polygon id
     const {lng, lat} = event.lngLat;
-    const ply = latLngToCell(lat, lng, 7);
+    const ply = latLngToCell(lat, lng, resolution);
     setCurrentClickedHexagon(ply);
     if(getClickableIndexes().has(ply)){
       handleOpen();
@@ -191,10 +194,10 @@ const RidingPoolMap = () => {
     return fetchDummyData().filter((data) => {
 
       const pickupLocation = latLngToCell(data.pickupLocation.coordinates[0], 
-        data.pickupLocation.coordinates[1], 7);
+        data.pickupLocation.coordinates[1], resolution);
 
       const dropoffLocation = latLngToCell(data.dropoffLocation.coordinates[0], 
-        data.dropoffLocation.coordinates[1], 7);
+        data.dropoffLocation.coordinates[1], resolution);
 
 
       return pickupLocation === polygon || dropoffLocation === polygon;
@@ -252,6 +255,14 @@ const RidingPoolMap = () => {
             <Typography variant="h6" component="h2">
               Min Passenger Rating: {data.minPassengerRating}/5
             </Typography>
+
+            <Typography variant="h6" component="h2">
+               Pickup Location: <GpsNotFixedIcon style={{fontSize: "14px"}}></GpsNotFixedIcon> {data.pickupLocation.coordinates[0]}, {data.pickupLocation.coordinates[1]}
+              </Typography>
+            
+            <Typography variant='h6' component="h2">
+              Dropoff Location: <GpsNotFixedIcon style={{fontSize: "14px"}}></GpsNotFixedIcon> {data.dropoffLocation.coordinates[0]}, {data.dropoffLocation.coordinates[1]}
+              </Typography>
           
             <Typography variant="h6" 
             component="h2" style={{wordBreak: "break-word", display: "inline"}} >
