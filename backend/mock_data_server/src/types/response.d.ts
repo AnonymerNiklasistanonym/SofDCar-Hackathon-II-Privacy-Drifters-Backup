@@ -6,7 +6,11 @@ export interface ResponseMatchingService {
     rideProviderBids: MsRideProviderBid[];
 }
 
-export interface ResponseAuthenticationServiceUser extends ASUserDb, ASPseudonymDb {}
+export interface ResponseAuthenticationServiceUser extends ASUserDb {
+    pseudonyms: string[];
+    past_rides: MsUserRideRequest[];
+    average_rating: number;
+}
 
 export interface ResponseAuthenticationService {
     users: ResponseAuthenticationServiceUser[];

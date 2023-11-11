@@ -10,3 +10,6 @@ export const getRandomArrayElement = <T>(...array: T[]): T => {
 export const getRandomCoordinateStuttgart = (): [number, number] => {
     return getRandomArrayElement(...[...Array(getRandomInt(100, 20))].map((): [number, number] => [parseFloat(`48.77${getRandomInt(600)}`), parseFloat(`9.18${getRandomInt(600)}`)]))
 }
+export const getRandomPseudonym = (): string => {
+    return `pseudonym_${getRandomHash()}`
+}

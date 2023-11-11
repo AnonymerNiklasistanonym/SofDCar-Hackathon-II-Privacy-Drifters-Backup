@@ -3,11 +3,11 @@ import { ResponseMatchingService } from "../types/response";
 
 import {latLngToCell} from "h3-js"
 
-import { getRandomInt, getRandomHash, getRandomArrayElement, getRandomCoordinateStuttgart } from "./helpers"
+import { getRandomInt, getRandomHash, getRandomArrayElement, getRandomCoordinateStuttgart, getRandomPseudonym } from "./helpers"
 
 export const generateMockDataMsUserRideRequest = (): MsUserRideRequest => {
     return {
-        userId: `user ${getRandomInt(123)}`,
+        userId: getRandomPseudonym(),
         pickupLocation: {
             type: `pickup location ${getRandomInt(123)}`,
             coordinates: getRandomCoordinateStuttgart()
@@ -17,10 +17,10 @@ export const generateMockDataMsUserRideRequest = (): MsUserRideRequest => {
             coordinates: getRandomCoordinateStuttgart()
         },
         gridLocation: latLngToCell(...getRandomCoordinateStuttgart(), 9),
-        rating: getRandomInt(5),
+        rating: getRandomInt(5, 2),
         userPublicKey: getRandomHash(),
-        maxUserRating: getRandomInt(5),
-        minRating: getRandomInt(5),
+        maxUserRating: getRandomInt(5, 3),
+        minRating: getRandomInt(5, 2),
         maxPassengers: getRandomInt(4),
         maxWaitingTime: getRandomInt(20),
         minPassengerRating: getRandomInt(5),
@@ -29,14 +29,14 @@ export const generateMockDataMsUserRideRequest = (): MsUserRideRequest => {
 
 export const generateMockDataMsRideProviderBid = (): MsRideProviderBid => {
     return {
-        rideRequestId: `ride request ${getRandomInt(123)}`,
-        rideProviderId: `ride provider ${getRandomInt(123)}`,
+        rideRequestId: getRandomPseudonym(),
+        rideProviderId: getRandomPseudonym(),
         amount: getRandomInt(5),
-        rating: getRandomInt(5),
+        rating: getRandomInt(5, 2),
         model: getRandomArrayElement("Tesla Model Y", "Mercedes EQS", "Ford Model T", "Volkswagen Beetle", "Volkswagen Golf"),
         estimatedArrivalTime: getRandomInt(25),
         passengerCount: getRandomInt(4),
-        vehiclePublicKey: `vehicle public key ${getRandomInt(123)}`,
+        vehiclePublicKey: `vehicle_public_key_${getRandomHash()}`,
     }
 }
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRandomCoordinateStuttgart = exports.getRandomArrayElement = exports.getRandomHash = exports.getRandomInt = void 0;
+exports.getRandomPseudonym = exports.getRandomCoordinateStuttgart = exports.getRandomArrayElement = exports.getRandomHash = exports.getRandomInt = void 0;
 const getRandomInt = (max, min = 0) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -17,3 +17,7 @@ const getRandomCoordinateStuttgart = () => {
     return (0, exports.getRandomArrayElement)(...[...Array((0, exports.getRandomInt)(100, 20))].map(() => [parseFloat(`48.77${(0, exports.getRandomInt)(600)}`), parseFloat(`9.18${(0, exports.getRandomInt)(600)}`)]));
 };
 exports.getRandomCoordinateStuttgart = getRandomCoordinateStuttgart;
+const getRandomPseudonym = () => {
+    return `pseudonym_${(0, exports.getRandomHash)()}`;
+};
+exports.getRandomPseudonym = getRandomPseudonym;
