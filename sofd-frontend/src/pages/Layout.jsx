@@ -1,11 +1,19 @@
 import React from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { ToggleButtonGroup, ToggleButton, Typography } from '@mui/material';
+import { ToggleButtonGroup, ToggleButton, Typography, useTheme } from '@mui/material';
+import { withStyles } from '@mui/styles';
+
+const StyledToggleButton = withStyles({
+  root: {
+    textTransform: 'none', // This line prevents the text from being uppercase
+  },
+})(ToggleButton);
 
 const Layout = () => {
   const [alignment, setAlignment] = React.useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -20,9 +28,9 @@ const Layout = () => {
   }, [location, alignment]);
 
   return (
-    <div>
+    <div style={{ backgroundColor: theme.palette.backgroundColor }}>
       <header style={{
-        backgroundColor: 'rgba(255, 255, 255, .5)',
+        backgroundColor: 'rgba(255, 255, 255, .85)',
         position: 'fixed',
         top: '3rem',
         left: '50%',
@@ -40,9 +48,9 @@ const Layout = () => {
           onChange={handleChange}
           aria-label="Service"
         >
-          <ToggleButton value="matching-service">Matching Service</ToggleButton>
-          <ToggleButton value="auth-service">Authentication Service</ToggleButton>
-          <ToggleButton value="smart-contract">Smart Contracts</ToggleButton>
+          <StyledToggleButton value="matching-service">Matching Service</StyledToggleButton>
+          <StyledToggleButton value="auth-service">Authentication Service</StyledToggleButton>
+          <StyledToggleButton value="smart-contract">Smart Contracts</StyledToggleButton>
         </ToggleButtonGroup>
       </header>
       <main><Outlet /></main>
