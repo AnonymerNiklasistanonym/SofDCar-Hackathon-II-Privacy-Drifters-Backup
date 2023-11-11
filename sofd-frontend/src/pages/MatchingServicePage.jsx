@@ -3,9 +3,7 @@ import RidingPoolMap from '../components/RidingPoolMap'
 
 const FirstPage = () => {
   return (
-    <div>
-      <RidingPoolMap />
-    </div>
+     <RidingPoolMap/>
   )
 }
 
