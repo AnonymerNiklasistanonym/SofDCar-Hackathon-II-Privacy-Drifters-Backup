@@ -285,6 +285,8 @@ const RidingPoolMap = () => {
             style={{
               height: "100vh",
               width: "100vw",
+              maxHeight: "100vh",
+              overflow: "hidden",
             }}
           >
 
