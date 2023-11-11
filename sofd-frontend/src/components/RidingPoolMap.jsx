@@ -8,21 +8,49 @@ const RidingPoolMap = () => {
 
   const hexindex7Id = "876524d95fffffe";
 
+  const [currentCordinateLng,setCurrentCordinateLng] = React.useState(37.81);
+
+  const [currentCordinateLat,setCurrentCordinateLat] = React.useState(-122.45);
+
+  const [currentCordinate,setCurrentCordinate] = React.useState([currentCordinateLng, currentCordinateLat]);
+
+
+  React.useEffect(() => {
+  }, [
+    currentCordinateLng,
+    currentCordinateLat,
+    currentCordinate,
+  ]);
+
+
+  
+
+
 
   function getPolygonIndexes() {
     const polygon = [
-      [37.813318999983238, -122.4089866999972145],
-      [37.7198061999978478, -122.3744736999993603],
-      [37.8151571999998453, -122.4798767000009008]
+      [currentCordinateLng - 1.2, currentCordinateLat + 1.2],
+      [currentCordinateLng - 1.2,  currentCordinateLat - 1.2],
+      [currentCordinateLng + 1.2, currentCordinateLat - 1.2],
+      [currentCordinateLng + 1.2, currentCordinateLat + 1.2],
   ];
-  console.log(polygonToCells(polygon, 7));
-  const hexagons = polygonToCells(polygon, 7);
 
-  return hexagons;
+  //const h3Ine
+
+  console.log(currentCordinateLng, currentCordinateLat)
+   const hexagons = polygonToCells(polygon, 7);
+    console.log(hexagons)
+    return hexagons;
   }
 
   function update(coordinates){
-    console.log(coordinates);
+    let {lng, lat} = coordinates.lngLat;
+    setCurrentCordinateLng(lat);
+    setCurrentCordinateLat(lng);
+    setCurrentCordinate([lng, lat]);
+
+
+
   }
   
   return (
@@ -44,24 +72,31 @@ const RidingPoolMap = () => {
               width: "100vw",
             }}
           >
+
+
+
             <Source
               type="geojson"
               data= {{
                 "type": "Feature",
                 "geometry": {
+                  // simgle polygon
                   "type": "MultiPolygon",
                   "coordinates": cellsToMultiPolygon(getPolygonIndexes(), true)
                 },
                 "id": "abc123"
               }}
             >
+
+              
               <Layer
                 {...{
                   type: "fill",
                   paint: {
-                    'fill-outline-color': 'white',
+                    'fill-outline-color': 'green',
                     "fill-color": "#E14C48",
                     "fill-opacity": 0.7,
+                    
                   },
                 }}
               />
