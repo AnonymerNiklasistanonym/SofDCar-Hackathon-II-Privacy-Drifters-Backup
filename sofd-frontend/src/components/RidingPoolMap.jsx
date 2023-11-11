@@ -2,8 +2,8 @@ import React from 'react';
 import Map, { Layer, Source, MapRef, Marker } from "react-map-gl";
 import {cellToBoundary, polygonToCells, cellsToMultiPolygon, cellToChildPos, latLngToCell } from "h3-js";
 import { Box, Button, Divider, Modal, Typography } from '@mui/material';
-
-
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 
 const RidingPoolMap = () => {
 
@@ -230,7 +230,13 @@ const RidingPoolMap = () => {
             {
               index > 0 ? <Divider /> : null
             }
-            Ride {index + 1} ({data.role})
+            <div>
+            {
+              data.role === "user" ? <EmojiPeopleIcon /> : <DirectionsCarIcon />
+            } 
+            </div>
+            <div>Ride {index + 1}</div>
+            
             <Typography variant="h6" component="h2">
               UserID: {data.userId}
                </Typography>
