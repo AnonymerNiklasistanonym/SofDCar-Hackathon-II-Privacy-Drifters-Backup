@@ -40,7 +40,7 @@ const AuthServicePage = () => {
           What is the Auth Service for?
         </Typography>
         <Typography variant='p' component="div" sx={{ flexGrow: 1, color: 'grey' }}>
-          The Auth Service manages user sign-in and sign-up processes. Following authentication, all interactions are conducted under a pseudonym that changes with each login.
+          The Auth Service manages user sign-in and sign-up processes. Following authentication, all interactions are conducted under a pseudonym that changes with each login.<br />The Matching Service can request the rounded average rating from the Auth Providers pseudonyms.
         </Typography>
       </Box>
 
@@ -105,7 +105,7 @@ const AuthServicePage = () => {
                   Your rating
                 </Typography>
                 <Typography color="text.secondary">
-                  Rating you recived
+                  Rating you received
                   <ul>
                     <li>Example: 3.5</li>
                   </ul>
