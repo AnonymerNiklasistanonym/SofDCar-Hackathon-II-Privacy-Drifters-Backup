@@ -32,13 +32,16 @@ const Layout = () => {
       <header style={{
         backgroundColor: 'rgba(255, 255, 255, .85)',
         position: 'fixed',
-        top: '3rem',
-        left: '50%',
-        transform: 'translate(-50%, 0)',
+        top: '0',
+        left: '0',
+        right: '0',
         borderRadius: '20px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         padding: '1rem',
         zIndex: 1000,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}>
         <Typography variant="h6" style={{ fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Check what data different services can access</Typography>
         <ToggleButtonGroup
