@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Routes";
 import { ToastContainer } from "react-toastify";
@@ -8,9 +8,9 @@ import "./index.css";
 
 
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} basename={process.env.REACT_APP_HOME_PAGE} />
     <ToastContainer />
   </React.StrictMode>
 );

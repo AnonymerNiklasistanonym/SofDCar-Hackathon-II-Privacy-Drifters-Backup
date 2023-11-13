@@ -15,16 +15,21 @@ const Layout = () => {
   const location = useLocation();
   const theme = useTheme();
 
-  const handleChange = (event, newAlignment) => {
+  const handleChange = (_event, newAlignment) => {
     if (alignment === newAlignment || newAlignment === null) return
     setAlignment(newAlignment);
-    navigate(`/${newAlignment}`);
+    console.log("Set alignment to", newAlignment)
+    navigate(`/${process.env.REACT_APP_HOME_PAGE}${newAlignment}`);
+    console.log("Navigate to", `/${process.env.REACT_APP_HOME_PAGE}${newAlignment}`)
   };
 
   React.useEffect(() => {
-    const path = location.pathname.replace('/', '');
+    const path = location.pathname
+      .replace(process.env.REACT_APP_HOME_PAGE, '')
+      .replace('/', '');
     if (path && path !== alignment) {
       setAlignment(path);
+      console.log("Set alignment to", path)
     }
   }, [location, alignment]);
 

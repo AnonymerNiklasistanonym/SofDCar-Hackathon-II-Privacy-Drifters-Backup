@@ -7,7 +7,7 @@ import App from "../App";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: process.env.REACT_APP_HOME_PAGE,
     element: <Layout />,
     children: [
       {
