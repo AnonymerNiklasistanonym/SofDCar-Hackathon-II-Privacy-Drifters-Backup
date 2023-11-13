@@ -10,12 +10,13 @@ const StyledToggleButton = withStyles({
 })(ToggleButton);
 
 const Layout = () => {
-  const [alignment, setAlignment] = React.useState(null);
+  const [alignment, setAlignment] = React.useState('matching-service');
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
 
   const handleChange = (event, newAlignment) => {
+    if (alignment === newAlignment || newAlignment === null) return
     setAlignment(newAlignment);
     navigate(`/${newAlignment}`);
   };
